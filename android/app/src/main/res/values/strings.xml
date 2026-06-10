@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quản lý công việc</string>
+
+    <!-- Quick Action short labels (max 10 chars) -->
+    <string name="shortcut_add_task_short">Thêm việc</string>
+    <string name="shortcut_pomodoro_short">Pomodoro</string>
+    <string name="shortcut_calendar_short">Lịch</string>
+    <string name="shortcut_reports_short">Báo cáo</string>
+
+    <!-- Quick Action long labels (max 25 chars) -->
+    <string name="shortcut_add_task_long">Thêm việc mới</string>
+    <string name="shortcut_pomodoro_long">Mở Pomodoro</string>
+    <string name="shortcut_calendar_long">Xem lịch</string>
+    <string name="shortcut_reports_long">Xem báo cáo</string>
+</resources>
