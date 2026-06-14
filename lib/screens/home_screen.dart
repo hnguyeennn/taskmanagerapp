@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 import '../models/task.dart';
 import '../models/filter_type.dart';
 import '../services/task_provider.dart';
@@ -250,6 +251,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildTaskList() {
     return Consumer<TaskProvider>(
       builder: (context, provider, _) {
+        if (provider.isLoading) {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => _buildShimmerCard(context),
+              childCount: 5,
+            ),
+          );
+        }
+
         final tasks = provider.filteredTasks;
 
         if (tasks.isEmpty) {
@@ -281,6 +291,50 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildShimmerCard(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Shimmer.fromColors(
+      baseColor: isDark ? const Color(0xFF2A2A2A) : const Color(0xFFE0E0E0),
+      highlightColor: isDark ? const Color(0xFF3A3A3A) : const Color(0xFFF5F5F5),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 20, height: 20,
+                  decoration: const BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Container(width: 180, height: 14, color: Colors.white),
+                const Spacer(),
+                Container(width: 40, height: 20,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Container(width: 120, height: 10, color: Colors.white),
+            const SizedBox(height: 6),
+            Container(width: 80, height: 10, color: Colors.white),
+          ],
+        ),
+      ),
     );
   }
 

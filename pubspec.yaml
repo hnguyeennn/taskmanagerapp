@@ -40,6 +40,9 @@ dependencies:
   # Quick Actions (long-press app icon)
   quick_actions: ^1.0.7
 
+  # Shimmer loading effect
+  shimmer: ^3.0.0
+
 
 dev_dependencies:
   flutter_test:

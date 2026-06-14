@@ -12,6 +12,8 @@ class TaskProvider extends ChangeNotifier {
   List<Tag> _allTags = [];
   final Map<int, List<SubTask>> _subtasksCache = {};
   final Map<int, List<Tag>> _tagsCache = {};
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
   
   FilterType _currentFilter = FilterType.all;
   String _searchKeyword = '';
@@ -135,9 +137,12 @@ class TaskProvider extends ChangeNotifier {
   // =================== LOAD DATA ===================
 
   Future<void> loadTasks() async {
+    _isLoading = true;
+    notifyListeners();
     _tasks = await DatabaseService.instance.getAllTasks();
     await _loadAllSubTasks();
     await _loadAllTaskTags();
+    _isLoading = false;
     notifyListeners();
   }
 

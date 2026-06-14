@@ -164,12 +164,14 @@ class _SettingsScreenState extends State<SettingsScreen>
                 ),
                 Divider(height: 1, color: AppColors.border(context)),
                 ListTile(
-                  leading: const Icon(Icons.code, color: AppColors.primary),
+                  leading: const Icon(Icons.group, color: AppColors.primary),
                   title: Text('Tác giả',
                       style: TextStyle(color: AppColors.textPrimary(context))),
-                  trailing: Text('Đồ án môn học',
-                      style:
-                          TextStyle(color: AppColors.textSecondary(context))),
+                  subtitle: Text(
+                    'Trần Đinh Hải Nguyên\nNguyễn Viết An Bình\nPhạm Huy Trung',
+                    style: TextStyle(
+                        color: AppColors.textSecondary(context), fontSize: 12, height: 1.8),
+                  ),
                 ),
               ],
             ),
