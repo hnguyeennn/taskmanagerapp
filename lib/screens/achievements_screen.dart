@@ -11,7 +11,7 @@ class AchievementsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background(context),
       appBar: AppBar(
-        title: Text('Thành tựu'),
+        title: const Text('Thành tựu'),
       ),
       body: Consumer<StreakService>(
         builder: (context, streak, _) {
@@ -135,7 +135,7 @@ class AchievementsScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isUnlocked
-                  ? AppColors.primary.withOpacity(0.5)
+                  ? AppColors.primary.withValues(alpha: 0.5)
                   : AppColors.border(context),
             ),
           ),
@@ -147,7 +147,7 @@ class AchievementsScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isUnlocked
                       ? AppColors.primaryLight
-                      : AppColors.border(context).withOpacity(0.3),
+                      : AppColors.border(context).withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(

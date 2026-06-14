@@ -15,7 +15,7 @@ class PomodoroScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background(context),
       appBar: AppBar(
-        title: Text('Pomodoro'),
+        title: const Text('Pomodoro'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -49,7 +49,7 @@ class PomodoroScreen extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.task_alt,
+                        const Icon(Icons.task_alt,
                             color: AppColors.primary, size: 20),
                         const SizedBox(width: 10),
                         Expanded(
@@ -99,7 +99,7 @@ class PomodoroScreen extends StatelessWidget {
                       horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                     color: _getTypeColor(pomo.currentType)
-                        .withOpacity(0.15),
+                        .withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -220,7 +220,7 @@ class PomodoroScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: AppColors.success.withOpacity(0.1),
+                      color: AppColors.success.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(

@@ -114,7 +114,7 @@ class TagsSelector extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          color: isSelected ? tag.color : tag.color.withOpacity(0.15),
+          color: isSelected ? tag.color : tag.color.withValues(alpha: 0.15),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: tag.color, width: isSelected ? 0 : 1),
         ),

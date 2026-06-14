@@ -27,7 +27,7 @@ class Goal {
       'title': title,
       'description': description,
       'targetDate': targetDate.toIso8601String(),
-      'color': color.value,
+      'color': color.toARGB32(),
       'icon': icon.codePoint,
       'createdAt': createdAt.toIso8601String(),
       'isArchived': isArchived ? 1 : 0,
@@ -41,7 +41,7 @@ class Goal {
       description: map['description'] as String? ?? '',
       targetDate: DateTime.parse(map['targetDate'] as String),
       color: Color(map['color'] as int),
-      // ignore: prefer_const_constructors
+      // ignore: non_const_argument_for_const_parameter
       icon: IconData(map['icon'] as int, fontFamily: 'MaterialIcons'),
       createdAt: DateTime.parse(map['createdAt'] as String),
       isArchived: (map['isArchived'] as int) == 1,

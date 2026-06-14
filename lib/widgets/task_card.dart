@@ -125,12 +125,12 @@ class TaskCard extends StatelessWidget {
                                 ),
                                 if (task.isRecurring) ...[
                                   const SizedBox(width: 6),
-                                  Icon(Icons.refresh,
+                                  const Icon(Icons.refresh,
                                       size: 14, color: AppColors.info),
                                 ],
                                 if (task.hasReminder) ...[
                                   const SizedBox(width: 4),
-                                  Icon(Icons.notifications_outlined,
+                                  const Icon(Icons.notifications_outlined,
                                       size: 14, color: AppColors.primary),
                                 ],
                               ],
@@ -165,9 +165,9 @@ class TaskCard extends StatelessWidget {
                                         value: subProgress,
                                         backgroundColor:
                                             AppColors.outline(context)
-                                                .withOpacity(0.2),
+                                                .withValues(alpha: 0.2),
                                         valueColor:
-                                            AlwaysStoppedAnimation<Color>(
+                                            const AlwaysStoppedAnimation<Color>(
                                                 AppColors.primary),
                                         minHeight: 4,
                                       ),
@@ -284,7 +284,7 @@ class TaskCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Row(

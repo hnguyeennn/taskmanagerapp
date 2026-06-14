@@ -10,8 +10,8 @@ import 'notification_service.dart';
 class TaskProvider extends ChangeNotifier {
   List<Task> _tasks = [];
   List<Tag> _allTags = [];
-  Map<int, List<SubTask>> _subtasksCache = {};
-  Map<int, List<Tag>> _tagsCache = {};
+  final Map<int, List<SubTask>> _subtasksCache = {};
+  final Map<int, List<Tag>> _tagsCache = {};
   
   FilterType _currentFilter = FilterType.all;
   String _searchKeyword = '';
@@ -200,10 +200,8 @@ class TaskProvider extends ChangeNotifier {
           await DatabaseService.instance.getTagsForTask(newTask.id!);
     }
 
-    // Đặt nhắc nhở
-    if (newTask.hasReminder) {
-      await NotificationService.instance.scheduleReminder(newTask);
-    }
+    // Đặt nhắc nhở và thông báo đến hạn
+    await NotificationService.instance.scheduleReminder(newTask);
 
     notifyListeners();
   }
@@ -238,9 +236,9 @@ class TaskProvider extends ChangeNotifier {
           await DatabaseService.instance.getTagsForTask(task.id!);
     }
 
-    // Cập nhật nhắc nhở
+    // Cập nhật nhắc nhở và thông báo đến hạn
     await NotificationService.instance.cancelReminder(task.id!);
-    if (task.hasReminder && !task.isCompleted) {
+    if (!task.isCompleted) {
       await NotificationService.instance.scheduleReminder(task);
     }
 

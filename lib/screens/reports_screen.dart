@@ -79,9 +79,9 @@ class _ReportsScreenState extends State<ReportsScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.analytics, color: AppColors.onPrimaryContainer),
+              const Icon(Icons.analytics, color: AppColors.onPrimaryContainer),
               const SizedBox(width: 8),
-              Text(
+              const Text(
                 'Tổng quan',
                 style: TextStyle(
                   fontSize: 14,
@@ -96,8 +96,8 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: report.changeFromPrevious > 0
-                        ? AppColors.success.withOpacity(0.2)
-                        : AppColors.error.withOpacity(0.2),
+                        ? AppColors.success.withValues(alpha: 0.2)
+                        : AppColors.error.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Row(
@@ -150,7 +150,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
         children: [
           Text(
             value.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.w500,
               color: AppColors.onPrimaryContainer,
@@ -161,7 +161,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
             label,
             style: TextStyle(
               fontSize: 12,
-              color: AppColors.onPrimaryContainer.withOpacity(0.8),
+              color: AppColors.onPrimaryContainer.withValues(alpha: 0.8),
             ),
           ),
         ],
@@ -232,7 +232,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   drawVerticalLine: false,
                   horizontalInterval: maxY > 0 ? (maxY / 4).ceilToDouble() : 1,
                   getDrawingHorizontalLine: (value) => FlLine(
-                    color: AppColors.outline(context).withOpacity(0.2),
+                    color: AppColors.outline(context).withValues(alpha: 0.2),
                     strokeWidth: 1,
                   ),
                 ),
@@ -304,7 +304,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     ),
                     belowBarData: BarAreaData(
                       show: true,
-                      color: AppColors.primary.withOpacity(0.15),
+                      color: AppColors.primary.withValues(alpha: 0.15),
                     ),
                   ),
                 ],
@@ -364,7 +364,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   Container(
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
-                      color: cat.color.withOpacity(0.15),
+                      color: cat.color.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(cat.icon, color: cat.color, size: 16),
@@ -401,7 +401,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           child: LinearProgressIndicator(
                             value: count / total,
                             backgroundColor:
-                                AppColors.outline(context).withOpacity(0.2),
+                                AppColors.outline(context).withValues(alpha: 0.2),
                             valueColor:
                                 AlwaysStoppedAnimation<Color>(cat.color),
                             minHeight: 5,

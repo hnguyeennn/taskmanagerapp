@@ -59,7 +59,7 @@ class GoalCard extends StatelessWidget {
                           width: 44,
                           height: 44,
                           decoration: BoxDecoration(
-                            color: goal.color.withOpacity(0.15),
+                            color: goal.color.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(goal.icon, color: goal.color, size: 22),

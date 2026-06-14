@@ -29,7 +29,7 @@ class StreakCard extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: AppColors.error.withOpacity(0.1),
+                            color: AppColors.error.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Text('🔥',
@@ -64,7 +64,7 @@ class StreakCard extends StatelessWidget {
               Container(
                 width: 1,
                 height: 50,
-                color: AppColors.outline(context).withOpacity(0.5),
+                color: AppColors.outline(context).withValues(alpha: 0.5),
               ),
               Expanded(
                 child: Padding(
@@ -77,7 +77,7 @@ class StreakCard extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: AppColors.warning.withOpacity(0.1),
+                              color: AppColors.warning.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: const Text('🏆',

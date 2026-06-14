@@ -19,7 +19,7 @@ class GoalDetailScreen extends StatelessWidget {
       backgroundColor: AppColors.background(context),
       appBar: AppBar(
         backgroundColor: goal.color,
-        title: Text('Chi tiết mục tiêu'),
+        title: const Text('Chi tiết mục tiêu'),
         iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           IconButton(
@@ -141,7 +141,7 @@ class GoalDetailScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [goal.color, goal.color.withOpacity(0.7)],
+          colors: [goal.color, goal.color.withValues(alpha: 0.7)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -155,7 +155,7 @@ class GoalDetailScreen extends StatelessWidget {
                 width: 64,
                 height: 64,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Icon(goal.icon, color: Colors.white, size: 32),
@@ -235,7 +235,7 @@ class GoalDetailScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -252,7 +252,7 @@ class GoalDetailScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColors.danger.withOpacity(0.6),
+                    color: AppColors.danger.withValues(alpha: 0.6),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -272,7 +272,7 @@ class GoalDetailScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
               value: progress,
-              backgroundColor: Colors.white.withOpacity(0.3),
+              backgroundColor: Colors.white.withValues(alpha: 0.3),
               valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
               minHeight: 8,
             ),
@@ -309,7 +309,7 @@ class GoalDetailScreen extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: goal.color.withOpacity(0.15),
+                color: goal.color.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(

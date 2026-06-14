@@ -120,7 +120,7 @@ class AppTheme {
       ),
     ),
 
-    cardTheme: CardThemeData(
+    cardTheme: const CardThemeData(
       elevation: 0,
       color: Color(0xFFFFFFFF),
       surfaceTintColor: Colors.transparent,
@@ -134,20 +134,20 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 0,
-        backgroundColor: Color(0xFFFF6B6B),
-        foregroundColor: Color(0xFFFFFFFF),
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-        shape: RoundedRectangleBorder(
+        backgroundColor: const Color(0xFFFF6B6B),
+        foregroundColor: const Color(0xFFFFFFFF),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
-        textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
       ),
     ),
 
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-        shape: RoundedRectangleBorder(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
       ),
@@ -162,13 +162,13 @@ class AppTheme {
       ),
     ),
 
-    chipTheme: ChipThemeData(
-      backgroundColor: const Color(0xFFFFEEEE),
-      selectedColor: const Color(0xFFFFD4D4),
-      labelStyle: const TextStyle(
+    chipTheme: const ChipThemeData(
+      backgroundColor: Color(0xFFFFEEEE),
+      selectedColor: Color(0xFFFFD4D4),
+      labelStyle: TextStyle(
           fontSize: 12, fontWeight: FontWeight.w500, color: Color(0xFF7A0000)),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      shape: const RoundedRectangleBorder(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       side: BorderSide.none,
@@ -307,9 +307,9 @@ class AppTheme {
       ),
     ),
 
-    cardTheme: CardThemeData(
+    cardTheme: const CardThemeData(
       elevation: 0,
-      color: const Color(0xFF261414),
+      color: Color(0xFF261414),
       surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -424,8 +424,9 @@ class AppDateUtils {
     if (difference == 1) return 'Ngày mai';
     if (difference == -1) return 'Hôm qua';
     if (difference > 1 && difference < 7) return 'Sau $difference ngày';
-    if (difference < -1 && difference > -7)
+    if (difference < -1 && difference > -7) {
       return 'Quá hạn ${-difference} ngày';
+    }
     return DateFormat('dd/MM/yyyy').format(date);
   }
 

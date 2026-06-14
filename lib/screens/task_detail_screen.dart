@@ -17,7 +17,7 @@ class TaskDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background(context),
       appBar: AppBar(
-        title: Text('Chi tiết'),
+        title: const Text('Chi tiết'),
         actions: [
           IconButton(
             icon: const Icon(Icons.edit),
@@ -72,12 +72,12 @@ class TaskDetailScreen extends StatelessWidget {
                     'Danh mục',
                     currentTask.category.label,
                     currentTask.category.color,
-                    currentTask.category.color.withOpacity(0.15)),
+                    currentTask.category.color.withValues(alpha: 0.15)),
 
                 _infoCard(context, Icons.flag, 'Mức ưu tiên',
                     currentTask.priority.label,
                     currentTask.priority.color,
-                    currentTask.priority.color.withOpacity(0.15)),
+                    currentTask.priority.color.withValues(alpha: 0.15)),
 
                 // MỚI: Hiển thị Lặp lại
                 if (currentTask.isRecurring)
@@ -90,7 +90,7 @@ class TaskDetailScreen extends StatelessWidget {
                               ? ' (đến ${AppDateUtils.formatFriendly(currentTask.recurringEndDate!)})'
                               : ''),
                       AppColors.info,
-                      AppColors.info.withOpacity(0.15)),
+                      AppColors.info.withValues(alpha: 0.15)),
 
                 if (currentTask.hasReminder &&
                     currentTask.reminderTime != null)
@@ -101,7 +101,7 @@ class TaskDetailScreen extends StatelessWidget {
                       AppDateUtils.formatFull(
                           currentTask.reminderTime!),
                       AppColors.warning,
-                      AppColors.warning.withOpacity(0.15)),
+                      AppColors.warning.withValues(alpha: 0.15)),
 
                 // MỚI: Hiển thị Tags
                 if (tags.isNotEmpty) ...[
@@ -117,7 +117,7 @@ class TaskDetailScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.label,
+                            const Icon(Icons.label,
                                 color: AppColors.primary, size: 18),
                             const SizedBox(width: 8),
                             Text('Nhãn',
@@ -136,7 +136,7 @@ class TaskDetailScreen extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10, vertical: 4),
                                     decoration: BoxDecoration(
-                                      color: tag.color.withOpacity(0.15),
+                                      color: tag.color.withValues(alpha: 0.15),
                                       borderRadius:
                                           BorderRadius.circular(12),
                                       border: Border.all(color: tag.color),
@@ -294,7 +294,7 @@ class TaskDetailScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.25),
+                    color: Colors.white.withValues(alpha: 0.25),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Row(
@@ -347,7 +347,7 @@ class TaskDetailScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.checklist,
+              const Icon(Icons.checklist,
                   color: AppColors.primary, size: 18),
               const SizedBox(width: 8),
               Text('Công việc con',

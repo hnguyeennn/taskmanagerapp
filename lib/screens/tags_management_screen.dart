@@ -25,7 +25,7 @@ class _TagsManagementScreenState extends State<TagsManagementScreen> {
     return Scaffold(
       backgroundColor: AppColors.background(context),
       appBar: AppBar(
-        title: Text('Quản lý nhãn'),
+        title: const Text('Quản lý nhãn'),
       ),
       body: Consumer<TaskProvider>(
         builder: (context, provider, _) {
@@ -69,7 +69,7 @@ class _TagsManagementScreenState extends State<TagsManagementScreen> {
                     width: 36,
                     height: 36,
                     decoration: BoxDecoration(
-                      color: tag.color.withOpacity(0.2),
+                      color: tag.color.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(Icons.label, color: tag.color),
@@ -158,7 +158,7 @@ class _TagsManagementScreenState extends State<TagsManagementScreen> {
                     runSpacing: 8,
                     children: _colorPalette.map((color) {
                       final isSelected =
-                          selectedColor.value == color.value;
+                          selectedColor.toARGB32() == color.toARGB32();
                       return InkWell(
                         onTap: () => setDialogState(
                             () => selectedColor = color),

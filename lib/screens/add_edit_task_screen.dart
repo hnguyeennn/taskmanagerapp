@@ -407,7 +407,7 @@ class _AddEditTaskScreenState extends State<AddEditTaskScreen> {
                     ),
                     Switch(
                       value: _hasReminder,
-                      activeColor: AppColors.primary,
+                      activeThumbColor: AppColors.primary,
                       onChanged: (value) {
                         setState(() {
                           _hasReminder = value;

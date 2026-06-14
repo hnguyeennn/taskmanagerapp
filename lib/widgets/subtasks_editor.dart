@@ -67,7 +67,6 @@ class _SubTasksEditorState extends State<SubTasksEditor> {
 
   void _reorderSubTasks(int oldIndex, int newIndex) {
     setState(() {
-      if (newIndex > oldIndex) newIndex--;
       final item = _subtasks.removeAt(oldIndex);
       _subtasks.insert(newIndex, item);
     });
@@ -119,7 +118,7 @@ class _SubTasksEditorState extends State<SubTasksEditor> {
             physics: const NeverScrollableScrollPhysics(),
             buildDefaultDragHandles: false,
             itemCount: _subtasks.length,
-            onReorder: _reorderSubTasks,
+            onReorderItem: _reorderSubTasks,
             itemBuilder: (context, index) {
               final sub = _subtasks[index];
               return Container(

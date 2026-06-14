@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
@@ -39,16 +40,9 @@ class NotificationService {
         ?.requestExactAlarmsPermission();
   }
 
-  // Đặt lịch nhắc nhở cho task
+  // Đặt lịch nhắc nhở cho task (reminder trước + thông báo đúng hạn)
   Future<void> scheduleReminder(Task task) async {
-    if (!task.hasReminder || task.reminderTime == null || task.id == null) {
-      return;
-    }
-
-    // Nếu thời gian nhắc đã qua thì không đặt
-    if (task.reminderTime!.isBefore(DateTime.now())) {
-      return;
-    }
+    if (task.id == null) return;
 
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
@@ -65,28 +59,78 @@ class NotificationService {
       android: androidDetails,
     );
 
-    await _plugin.zonedSchedule(
-      task.id!,
-      'Nhắc nhở: ${task.title}',
-      task.description.isEmpty
-          ? 'Công việc cần làm: ${task.title}'
-          : task.description,
-      tz.TZDateTime.from(task.reminderTime!, tz.local),
-      details,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      payload: task.id.toString(),
-    );
+    final now = DateTime.now();
+
+    // Thông báo nhắc trước (nếu bật reminder và chưa qua)
+    if (task.hasReminder && task.reminderTime != null &&
+        task.reminderTime!.isAfter(now)) {
+      await _plugin.zonedSchedule(
+        task.id!,
+        'Nhắc nhở: ${task.title}',
+        task.description.isEmpty
+            ? 'Công việc sắp đến hạn'
+            : task.description,
+        tz.TZDateTime.from(task.reminderTime!, tz.local),
+        details,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        payload: task.id.toString(),
+      );
+    }
+
+    // Thông báo đúng lúc đến hạn (dueDate), dùng id offset để tránh trùng
+    if (task.dueDate.isAfter(now)) {
+      await _plugin.zonedSchedule(
+        task.id! + 100000,
+        'Đến hạn: ${task.title}',
+        task.description.isEmpty
+            ? 'Công việc đã đến hạn cần hoàn thành!'
+            : task.description,
+        tz.TZDateTime.from(task.dueDate, tz.local),
+        details,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        payload: task.id.toString(),
+      );
+    }
   }
 
-  // Hủy 1 nhắc nhở
+  // Hủy 1 nhắc nhở (cả reminder lẫn due notification)
   Future<void> cancelReminder(int taskId) async {
     await _plugin.cancel(taskId);
+    await _plugin.cancel(taskId + 100000);
   }
 
   // Hủy tất cả nhắc nhở
   Future<void> cancelAllReminders() async {
     await _plugin.cancelAll();
+  }
+
+  // Thông báo kết thúc phiên Pomodoro (có rung + âm thanh)
+  Future<void> showPomodoroComplete({
+    required String title,
+    required String body,
+  }) async {
+    final androidDetails = AndroidNotificationDetails(
+      'pomodoro_channel',
+      'Pomodoro Timer',
+      channelDescription: 'Thông báo khi kết thúc phiên Pomodoro',
+      importance: Importance.max,
+      priority: Priority.max,
+      enableVibration: true,
+      vibrationPattern: Int64List.fromList([0, 500, 200, 500, 200, 500]),
+      playSound: true,
+      fullScreenIntent: true,
+      ticker: 'pomodoro',
+    );
+
+    await _plugin.show(
+      99999,
+      title,
+      body,
+      NotificationDetails(android: androidDetails),
+    );
   }
 }

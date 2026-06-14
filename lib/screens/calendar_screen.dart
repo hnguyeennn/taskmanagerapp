@@ -157,7 +157,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             color: AppColors.textSecondary(context),
             fontWeight: FontWeight.w500,
           ),
-          weekendStyle: TextStyle(
+          weekendStyle: const TextStyle(
             fontSize: 12,
             color: AppColors.danger,
             fontWeight: FontWeight.w500,
@@ -166,7 +166,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
         calendarStyle: CalendarStyle(
           outsideDaysVisible: false,
-          weekendTextStyle: TextStyle(
+          weekendTextStyle: const TextStyle(
               color: AppColors.danger, fontWeight: FontWeight.w500),
           defaultTextStyle: TextStyle(
               color: AppColors.textPrimary(context)),
@@ -178,7 +178,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             color: AppColors.primary.withValues(alpha: 0.2),
             shape: BoxShape.circle,
           ),
-          todayTextStyle: TextStyle(
+          todayTextStyle: const TextStyle(
             color: AppColors.primary,
             fontWeight: FontWeight.w700,
           ),

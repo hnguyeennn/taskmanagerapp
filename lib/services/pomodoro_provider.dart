@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../models/pomodoro_session.dart';
-import '../models/task.dart' hide Priority;
+import '../models/task.dart';
 import 'database_service.dart';
+import 'notification_service.dart';
 
 enum PomodoroState { idle, running, paused, completed }
 
@@ -225,11 +225,9 @@ class PomodoroProvider extends ChangeNotifier {
   }
 
   Future<void> _showCompletionNotification() async {
-    final plugin = FlutterLocalNotificationsPlugin();
-    
     String title;
     String body;
-    
+
     switch (_currentType) {
       case PomodoroType.work:
         title = 'Hoàn thành phiên làm việc!';
@@ -247,21 +245,9 @@ class PomodoroProvider extends ChangeNotifier {
         break;
     }
 
-    const androidDetails = AndroidNotificationDetails(
-      'pomodoro_channel',
-      'Pomodoro',
-      channelDescription: 'Thông báo phiên Pomodoro',
-      importance: Importance.high,
-      priority: Priority.high,
-      enableVibration: true,
-      playSound: true,
-    );
-
-    await plugin.show(
-      99999,
-      title,
-      body,
-      const NotificationDetails(android: androidDetails),
+    await NotificationService.instance.showPomodoroComplete(
+      title: title,
+      body: body,
     );
   }
 

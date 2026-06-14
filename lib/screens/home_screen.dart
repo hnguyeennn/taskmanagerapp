@@ -145,10 +145,10 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Row(
                 children: [
-                  Icon(Icons.analytics_outlined,
+                  const Icon(Icons.analytics_outlined,
                       color: AppColors.onPrimaryContainer, size: 20),
                   const SizedBox(width: 8),
-                  Text(
+                  const Text(
                     'Tổng quan',
                     style: TextStyle(
                       fontSize: 13,
@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const Spacer(),
                   Text(
                     'Tiến độ ${(provider.completionRate * 100).toStringAsFixed(0)}%',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: AppColors.onPrimaryContainer,
@@ -173,9 +173,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: LinearProgressIndicator(
                   value: provider.completionRate,
                   backgroundColor:
-                      AppColors.onPrimaryContainer.withOpacity(0.2),
+                      AppColors.onPrimaryContainer.withValues(alpha: 0.2),
                   valueColor:
-                      AlwaysStoppedAnimation<Color>(AppColors.primary),
+                      const AlwaysStoppedAnimation<Color>(AppColors.primary),
                   minHeight: 10,
                 ),
               ),
@@ -205,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 6),
           Text(
             value.toString(),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
               color: AppColors.onPrimaryContainer,
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label,
             style: TextStyle(
               fontSize: 11,
-              color: AppColors.onPrimaryContainer.withOpacity(0.8),
+              color: AppColors.onPrimaryContainer.withValues(alpha: 0.8),
             ),
           ),
         ],
@@ -253,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
         final tasks = provider.filteredTasks;
 
         if (tasks.isEmpty) {
-          return SliverToBoxAdapter(
+          return const SliverToBoxAdapter(
             child: SizedBox(
               height: 300,
               child: M3EmptyState(
@@ -299,6 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _confirmDelete(Task task) async {
+    final provider = context.read<TaskProvider>();
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
@@ -322,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     if (confirmed == true) {
-      await context.read<TaskProvider>().deleteTask(task.id!);
+      await provider.deleteTask(task.id!);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Đã xóa công việc')),
@@ -332,6 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _confirmDeleteCompleted() async {
+    final provider = context.read<TaskProvider>();
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
@@ -355,7 +357,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     if (confirmed == true) {
-      await context.read<TaskProvider>().deleteCompletedTasks();
+      await provider.deleteCompletedTasks();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Đã xóa tất cả việc đã xong')),

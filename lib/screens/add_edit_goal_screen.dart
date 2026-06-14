@@ -166,7 +166,7 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
                 spacing: 10,
                 runSpacing: 10,
                 children: _colors.map((color) {
-                  final isSelected = _selectedColor.value == color.value;
+                  final isSelected = _selectedColor.toARGB32() == color.toARGB32();
                   return InkWell(
                     onTap: () =>
                         setState(() => _selectedColor = color),
@@ -216,7 +216,7 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
                         height: 44,
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? _selectedColor.withOpacity(0.15)
+                              ? _selectedColor.withValues(alpha: 0.15)
                               : Colors.transparent,
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
@@ -270,7 +270,7 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [_selectedColor, _selectedColor.withOpacity(0.7)],
+          colors: [_selectedColor, _selectedColor.withValues(alpha: 0.7)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -282,7 +282,7 @@ class _AddEditGoalScreenState extends State<AddEditGoalScreen> {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(_selectedIcon, color: Colors.white, size: 28),
