@@ -13,11 +13,9 @@ class NotificationService {
 
   // Khởi tạo notification service
   Future<void> init() async {
-    // Cấu hình timezone
     tz_data.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation('Asia/Ho_Chi_Minh'));
 
-    // Cấu hình cho Android
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -26,18 +24,28 @@ class NotificationService {
     );
 
     await _plugin.initialize(settings);
+    await requestPermissions();
+  }
 
-    // Yêu cầu quyền thông báo cho Android 13+
-    await _plugin
+  // Xin quyền thông báo — gọi lại được từ Settings
+  Future<bool> requestPermissions() async {
+    final androidImpl = _plugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestNotificationsPermission();
+            AndroidFlutterLocalNotificationsPlugin>();
 
-    // Yêu cầu quyền đặt alarm chính xác cho Android 12+
-    await _plugin
+    final notifGranted =
+        await androidImpl?.requestNotificationsPermission() ?? false;
+    await androidImpl?.requestExactAlarmsPermission();
+
+    return notifGranted;
+  }
+
+  // Kiểm tra quyền thông báo hiện tại
+  Future<bool> hasNotificationPermission() async {
+    final androidImpl = _plugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestExactAlarmsPermission();
+            AndroidFlutterLocalNotificationsPlugin>();
+    return await androidImpl?.areNotificationsEnabled() ?? false;
   }
 
   // Đặt lịch nhắc nhở cho task (reminder trước + thông báo đúng hạn)
